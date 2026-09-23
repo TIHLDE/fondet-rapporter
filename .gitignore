@@ -1,0 +1,9 @@
+out/
+*.pdf
+
+# AI tooling, never tracked
+CLAUDE.md
+DESIGN.md
+.claude/
+.mcp.json
+.playwright-mcp/
