@@ -93,32 +93,3 @@
   v(24pt, weak: true)
   disclaimer
 }
-
-// Short document: no cover, no table of contents, no heading numbers. For fact
-// sheets, single-fund notes and decision memos.
-#let note(title: none, subtitle: none, year: none, body) = {
-  set document(title: title, author: "Forvaltningsgruppen, TIHLDE")
-  show link: underline
-  set text(.._text-args)
-  set par(.._par-args)
-
-  set heading(numbering: none)
-  show heading: set block(above: 16pt, below: 8pt)
-  show heading.where(level: 1): set text(size: 1.3em, fill: theme.blue)
-  show heading.where(level: 2): set text(size: 1.1em, fill: theme.blue)
-
-  set page(.._page-args(title, year))
-
-  block(above: 0pt, below: 14pt)[
-    #text(size: 1.8em, weight: "bold")[#title]
-    #if subtitle != none [
-      #v(2pt)
-      #text(size: theme.small-size, fill: theme.muted)[#subtitle]
-    ]
-  ]
-
-  body
-
-  v(20pt, weak: true)
-  disclaimer
-}

@@ -31,8 +31,8 @@ watch:
 
 # make new YEAR=2026 PERIOD=q1
 # make new YEAR=2026 PERIOD=annual KIND=annual
-# KIND is any folder under templates/<TEMPLATE>: quarterly, annual, factsheet,
-# fund-note, decision-memo, analysis. TEMPLATE=2025 picks an older generation.
+# KIND is a folder under templates/<TEMPLATE>: quarterly or annual.
+# TEMPLATE=2025 picks the older generation.
 new:
 	@test -n "$(YEAR)" -a -n "$(PERIOD)" || { echo "Usage: make new YEAR=2026 PERIOD=q1 [KIND=annual] [TEMPLATE=2025]"; exit 1; }
 	@test -d templates/$(TEMPLATE)/$(KIND) || { echo "No template templates/$(TEMPLATE)/$(KIND)"; exit 1; }
