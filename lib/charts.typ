@@ -40,33 +40,3 @@
       .flatten(),
   )
 }
-
-// Diverging bars around a zero line. Negative values grow left, positive right,
-// and the value sits outside the bar so nothing can overlap.
-#let bar-chart(items, peak: none, row-height: 14pt) = {
-  let limit = if peak != none { peak } else {
-    items.fold(0.0, (highest, item) => calc.max(highest, calc.abs(item.at(1))))
-  }
-  set text(size: theme.small-size)
-
-  grid(
-    columns: (auto, 1fr, 1fr, auto),
-    column-gutter: 6pt,
-    row-gutter: 4pt,
-    align: (left + horizon, right + horizon, left + horizon, right + horizon),
-    grid.vline(x: 2, stroke: 0.5pt + theme.rule),
-    ..items
-      .map(item => {
-        let (label, value) = item
-        let width = calc.abs(value) / limit * 100%
-        let colour = if value < 0 { theme.negative } else { theme.positive }
-        (
-          [#label],
-          if value < 0 { rect(width: width, height: row-height, stroke: none, fill: colour) },
-          if value >= 0 { rect(width: width, height: row-height, stroke: none, fill: colour) },
-          text(fill: colour, weight: "bold")[#format.pct(value, sign: true)],
-        )
-      })
-      .flatten(),
-  )
-}
