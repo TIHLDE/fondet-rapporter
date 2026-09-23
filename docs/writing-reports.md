@@ -3,20 +3,16 @@
 What belongs in each document, and the methods the templates leave room for.
 Aimed at whoever writes the next report, not at a reader of the finished one.
 
-## Which template
+## The two reports
 
 | Template | Use it for | Length |
 | --- | --- | --- |
 | `quarterly` | The quarter's report to the association | 10 to 16 pages |
 | `annual` | The year seen as a whole, with the four quarters side by side | 12 to 20 pages |
-| `factsheet` | A single page anyone can read in two minutes | 1 page |
-| `analysis` | Attribution, risk and exposure when a paragraph is not enough | 3 to 5 pages |
-| `fund-note` | One fund examined on its own before keeping or selling it | 2 to 4 pages |
-| `decision-memo` | The case for a trade, written before the trade | 2 to 3 pages |
 
-The quarterly report is the obligation. The rest exist so that report can stay
-short: move the arithmetic into an analysis note and the argument into a
-decision memo, and the quarterly is left with what happened and what it means.
+Two templates, because two documents are actually owed. Anything else, a single
+page before a meeting or the case for a trade, is worth a template only once it
+has been written by hand a few times and the shape has settled.
 
 ## What a performance report has to contain
 

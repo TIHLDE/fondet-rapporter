@@ -18,20 +18,11 @@ assets/       logos
 
 ## Templates
 
-`templates/2026` is the current generation. Each folder holds the source and a
-compiled `preview.pdf`, so you can look before you copy.
-
-| Template | For |
-| --- | --- |
-| `quarterly` | The quarter's report to the association |
-| `annual` | The year as a whole |
-| `factsheet` | One page: figures, allocation, risk, comment |
-| `analysis` | Attribution, risk-adjusted return, exposure, stress test |
-| `fund-note` | One fund examined before keeping or selling it |
-| `decision-memo` | The case for a trade, written before the trade |
+`templates/2026` is the current generation: `quarterly` and `annual`. Each folder
+holds the draft and a compiled `preview.pdf`, so you can look before you copy.
 
 [docs/writing-reports.md](docs/writing-reports.md) says what belongs in each of
-them, and gives the formulas behind the analysis sections.
+them, and gives the formulas behind the analysis chapter.
 
 A report built on the library is two files: `main.typ` with the text and
 `funds.typ` with the per-fund figures. Imports use root paths (`/lib/doc.typ`),
@@ -71,7 +62,6 @@ template on each pull request.
 ```sh
 make new YEAR=2026 PERIOD=q1                     # quarterly
 make new YEAR=2026 PERIOD=annual KIND=annual     # annual
-make new YEAR=2026 PERIOD=q1 KIND=factsheet      # any folder under templates/2026
 make new YEAR=2026 PERIOD=q1 TEMPLATE=2025       # older template generation
 ```
 

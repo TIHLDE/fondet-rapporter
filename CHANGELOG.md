@@ -5,10 +5,8 @@ Reports built on the library always use the current version of it.
 
 ## 2026-09-23
 
-- Four more templates: `factsheet`, `analysis`, `fund-note`, `decision-memo`
 - Quarterly and annual reports get an analysis chapter: attribution,
   risk-adjusted return and currency effect
-- `lib/doc.typ` gained `note()`, a short document without cover page or contents
 - Compiled PDFs moved next to the source they were built from, templates
   included
 - `docs/writing-reports.md` on what belongs in each report, with the formulas
