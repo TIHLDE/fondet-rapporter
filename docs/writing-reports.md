@@ -5,68 +5,60 @@ Aimed at whoever writes the next report, not at a reader of the finished one.
 
 ## Which template
 
-Two documents are owed, the quarterly and the annual report, and each comes in
-more than one shape. Pick the shape that fits the quarter, not the one that
-fills the most pages.
+Two documents are owed, the quarterly and the annual report. Each is a folder of
+shapes under `templates/<year>/`, and every shape is a full draft. Pick the one
+that fits the quarter, not the one that fills the most pages.
 
-| Template | Shape | Use it for | Length |
-| --- | --- | --- | --- |
-| `quarterly` | Chapters, numbered, with contents | The full report when something structural changed | 10 to 16 pages |
-| `quarterly-status` | Two columns, facts and figures first | The ordinary quarter, and the one people actually read | 2 to 3 pages |
-| `quarterly-letter` | Narrative, addressed to the members | A quarter where the argument matters more than the tables | 2 to 4 pages |
-| `annual` | Chapters, numbered, with contents | The year seen as a whole | 12 to 20 pages |
-| `annual-endowment` | Governance first, appendix at the back | The year when the association wants the framework and the limits documented | 15 to 25 pages |
+| Shape | Use it for | Length |
+| --- | --- | --- |
+| `quarterly/classic` | The full report, when something structural changed | 10 to 16 pages |
+| `quarterly/skagen` | The ordinary quarter, and the one people actually read | 2 to 3 pages |
+| `quarterly/verdi` | A quarter where the argument matters more than the tables | 2 to 4 pages |
+| `quarterly/onepage` | Handing something out before a meeting | 1 page |
+| `quarterly/board` | The board meeting, where a decision is needed | 2 to 3 pages |
+| `quarterly/slides` | Presenting the quarter to a room | 10 slides |
+| `annual/classic` | The year seen as a whole | 12 to 20 pages |
+| `annual/nbim` | The year where the framework and the limits matter | 15 to 25 pages |
+| `annual/uc` | The year the association wants governance documented | 15 to 25 pages |
+| `annual/ucits` | The year where the accounts are the point | 12 to 18 pages |
 
-All five build on the same library, so the numbers and the fund data are shared.
-Switching shape means changing the `main.typ` you copied, not re-entering data.
+All of them build on the same library, so the numbers and the fund data are
+shared. Switching shape means copying another `main.typ`, not re-entering data.
 
 ## Where the shapes come from
 
-`quarterly-status` follows the layout Norwegian fund managers use for their
+`quarterly/skagen` follows the layout Norwegian fund managers use for their
 monthly status reports: a fact column down the left, a period table against the
 index, returns by calendar year, the manager's comment, then the holdings and
 the disclaimer (SKAGEN Fondene, 2025).
 
-`annual-endowment` follows the way institutional endowments report to the body
-that owns the money. The University of California opens with the purpose of the
-report and who prepared it, then significant changes since last year, then the
-consolidated overview, then profiles per pool, and closes with an appendix of
-risk and return, benchmark history, spending policy, glossary and data sources
-(University of California, 2024). The limits-and-breaches table and the separate
-section for relative return come from the reports of the Norwegian sovereign
-wealth fund, which leads with what the fund returned against its benchmark and
-then accounts for the framework it operates inside (Norges Bank Investment
-Management, 2025).
-
-`quarterly-letter` is the shape student investment groups use when they publish:
+`quarterly/verdi` is the shape student investment groups use when they publish:
 portfolio changes, the market view, and reflections on what happened, written as
 prose rather than as sections (Verdi NTNU, n.d.).
 
-## What a performance report has to contain
+`quarterly/onepage` and `quarterly/board` are the two documents that get read
+when nobody has time: the fact sheet a fund publishes for people who will not
+open the report, and the pack a board needs, which opens with what it is being
+asked to decide rather than with what happened.
 
-The Global Investment Performance Standards are written for firms managing
-client money, not for a student fund, but the reporting requirements are a
-useful floor. A GIPS composite report presents returns for at least five years
-and builds towards ten, shows the benchmark return next to the portfolio return
-for every period, states assets under management at each period end, and gives
-the three-year annualised standard deviation of both portfolio and benchmark.
-Returns are calculated after transaction costs (CFA Institute, 2026).
+`annual/nbim` follows the reporting of the Norwegian sovereign wealth fund: the
+return first, the return against the benchmark as its own chapter with the
+sources of the difference, then the framework and the limits the fund is managed
+inside, operational events, responsible investment, and the accounts at the back
+(Norges Bank Investment Management, 2025).
 
-Carried over to these templates, that means every report states:
+`annual/uc` follows the way institutional endowments report to the body that
+owns the money. The University of California opens with the purpose of the
+report and who prepared it, then significant changes since last year, then the
+consolidated overview, then profiles per pool, and closes with an appendix of
+risk and return, benchmark history, spending policy, glossary and data sources
+(University of California, 2024).
 
-- Return for the period and the benchmark return for the same period, in the
-  same table, net of costs
-- Longer periods next to it: year to date, one, three and five years, since
-  inception
-- Assets under management at the start and the end of the period
-- A risk measure, not only a return
-- Which benchmark, and why that one
-
-Keep the benchmark fixed. Verdipapirfondenes forening has an industry
-recommendation on benchmark selection precisely because a benchmark chosen
-after the fact flatters the manager, and further recommendations on reporting
-active share and on individualised cost reporting (Verdipapirfondenes forening,
-n.d.). A changed benchmark is a disclosure, not a footnote.
+`annual/ucits` carries what a regulated fund's annual report has to contain: a
+statement of assets and liabilities, a detailed income and expenditure account
+for the year, a report on the activity, and the holdings (Directive 2009/65/EC,
+2009, Article 69). A student fund is not a UCITS and has no auditor, but the
+list is a sound floor, and the template asks who checked the figures instead.
 
 ## Commentary
 
@@ -137,6 +129,12 @@ when it strengthens.
 
 AnalystPrep. (n.d.). *Sources of portfolio returns and attribution*.
 https://analystprep.com/study-notes/cfa-level-iii/sources-of-portfolio-returns/
+
+Directive 2009/65/EC of the European Parliament and of the Council of 13 July
+2009 on the coordination of laws, regulations and administrative provisions
+relating to undertakings for collective investment in transferable securities
+(UCITS). (2009). Article 69.
+https://www.legislation.gov.uk/eudr/2009/65/chapter/IX/section/1
 
 CFA Institute. (2026). *Overview of the Global Investment Performance
 Standards*. https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/overview-of-the-global-investment-performance-standards

@@ -5,11 +5,15 @@ Reports built on the library always use the current version of it.
 
 ## 2026-09-23
 
-- Three more shapes to choose from: `quarterly-status`, `quarterly-letter` and
-  `annual-endowment`, modelled on how fund managers, endowments and student
-  investment groups actually publish
-- `report()` takes `contents` and `numbered`, so a short report can skip the
-  table of contents and the chapter numbers
+- Templates are a folder of shapes per document: `templates/<year>/quarterly/<shape>`
+  and `templates/<year>/annual/<shape>`, each named after what it is modelled on
+- Ten shapes: quarterly as `classic`, `skagen`, `verdi`, `onepage`, `board` and
+  `slides`; annual as `classic`, `nbim`, `uc` and `ucits`
+- `lib/slides.typ` for the 16:9 deck, built on the same colours and fonts, no
+  external package
+- `make new` takes `SHAPE`
+- `report()` takes `contents`, `numbered` and `cover-page`, which is what
+  separates the long shapes from the short ones
 - Quarterly and annual reports get an analysis chapter: attribution,
   risk-adjusted return and currency effect
 - Compiled PDFs moved next to the source they were built from, templates
