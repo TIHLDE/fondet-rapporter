@@ -77,7 +77,7 @@
 
   body
 
-  v(40pt)
+  v(24pt, weak: true)
   align(center)[
     #text(size: theme.small-size, style: "italic")[
       Dette er Forvaltningsgruppens egne vurderinger og skal ikke leses som
