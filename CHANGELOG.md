@@ -1,7 +1,14 @@
 # Changelog
 
 Changes to the templates in `templates/` and the shared library in `lib/`.
-Reports in `reports/` always build against the current library.
+Reports built on the library always use the current version of it.
+
+## 2026-09-23
+
+- Reports and templates are ordered by year: `reports/<year>/<period>` and
+  `templates/<year>/<kind>`
+- `templates/2025` holds the generation the Q4 2025 report was written with
+- Compiled PDFs are tracked in `pdf/`
 
 ## templates/v1
 
