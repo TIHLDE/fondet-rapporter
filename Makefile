@@ -1,27 +1,38 @@
 TYPST ?= typst
-REPORTS := $(wildcard reports/*/main.typ)
-PDFS := $(REPORTS:reports/%/main.typ=out/%.pdf)
-LIB := $(wildcard lib/*.typ)
+
+# Sources of every report, so any edit rebuilds. Compiling takes milliseconds.
+SOURCES := $(wildcard reports/*/*/*.typ) $(wildcard lib/*.typ)
+
+# The Q2 2026 draft needs the cetz package and only builds with network access,
+# so it stays out of the default build.
+REPORTS := $(filter-out reports/2026/q2-draft/main.typ, $(wildcard reports/*/*/main.typ))
+PDFS := $(REPORTS:reports/%/main.typ=pdf/%.pdf)
+
+KIND ?= quarterly
+TEMPLATE ?= 2026
 
 .PHONY: all clean watch new
 all: $(PDFS)
 
-out/%.pdf: reports/%/main.typ reports/%/funds.typ $(LIB)
-	@mkdir -p out
+pdf/%.pdf: reports/%/main.typ $(SOURCES)
+	@mkdir -p $(dir $@)
 	$(TYPST) compile --root . $< $@
 
-# make watch PERIOD=2026-q1
+# make watch YEAR=2026 PERIOD=q1
 watch:
-	$(TYPST) watch --root . reports/$(PERIOD)/main.typ out/$(PERIOD).pdf
+	$(TYPST) watch --root . reports/$(YEAR)/$(PERIOD)/main.typ pdf/$(YEAR)/$(PERIOD).pdf
 
-# make new PERIOD=2026-q1            (quarterly, the default)
-# make new PERIOD=2026 KIND=annual   (annual)
-KIND ?= quarterly
+# make new YEAR=2026 PERIOD=q1
+# make new YEAR=2026 PERIOD=annual KIND=annual
+# TEMPLATE=2025 picks an older template generation
 new:
-	@test -n "$(PERIOD)" || { echo "Usage: make new PERIOD=2026-q1 [KIND=annual]"; exit 1; }
-	@test ! -d reports/$(PERIOD) || { echo "reports/$(PERIOD) already exists"; exit 1; }
-	cp -r templates/$(KIND) reports/$(PERIOD)
-	@echo "Created reports/$(PERIOD). Fill in the TODOs, then: make out/$(PERIOD).pdf"
+	@test -n "$(YEAR)" -a -n "$(PERIOD)" || { echo "Usage: make new YEAR=2026 PERIOD=q1 [KIND=annual] [TEMPLATE=2025]"; exit 1; }
+	@test -d templates/$(TEMPLATE)/$(KIND) || { echo "No template templates/$(TEMPLATE)/$(KIND)"; exit 1; }
+	@test ! -d reports/$(YEAR)/$(PERIOD) || { echo "reports/$(YEAR)/$(PERIOD) already exists"; exit 1; }
+	@mkdir -p reports/$(YEAR)
+	cp -r templates/$(TEMPLATE)/$(KIND) reports/$(YEAR)/$(PERIOD)
+	@echo "Created reports/$(YEAR)/$(PERIOD). Fill in the TODOs, then: make pdf/$(YEAR)/$(PERIOD).pdf"
 
+# The PDFs are tracked, so this only removes files git can restore.
 clean:
-	rm -rf out
+	rm -rf pdf

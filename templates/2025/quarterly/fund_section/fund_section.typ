@@ -1,7 +1,7 @@
 // Dokumentstil
-#set page(margin: (top: 22mm, bottom: 22mm, left: 18mm, right: 18mm))
+#set page(margin: (top: 0mm, bottom: 0mm, left: 0mm, right: 0mm))
 #set text(font: "Libertinus Sans", size: 11pt)
-#set par(leading: 1.25em, spacing: 0.6em)
+#set par(leading: 0em, spacing: 0em)
 
 // Farger
 #let color_table_header_fill = luma(235)
@@ -10,16 +10,12 @@
 
 // Typografi
 #let section_title(section_text) = [
-  #v(10pt)
   #text(size: 14pt, weight: "bold")[#section_text]
-  #v(6pt)
   #line(length: 100%, stroke: (paint: color_rule, thickness: 0.8pt))
-  #v(6pt)
 ]
 
 #let sub_title(subsection_text) = [
-  #text(size: 12pt, weight: "bold")[#subsection_text]
-  #v(4pt)
+  #text(size: 10pt, weight: "bold")[#subsection_text]
 ]
 
 #let require_nonempty(value, message) = {
@@ -201,8 +197,6 @@
     column_alignments: (left, left),
   )
 
-  #v(10pt)
-
   #sub_title("Avkastning (1–3–5 år)")
   #nice_table(
     table_header_returns,
@@ -210,18 +204,12 @@
     column_alignments: (left, right, right, right),
   )
 
-  #v(12pt)
-
   #sub_title("Risikomål")
   #risk_metrics_table(build_risk_rows(fund_data.risk_metrics))
 
-  #v(12pt)
-
   #sub_title("Kort kommentar (maks 5 setninger)")
-  #set par(leading: 1.25em, spacing: 0.5em)
+  #set par(leading: 1em, spacing: 0em)
   #fund_data.comment
-
-  #v(14pt)
 ]
 
 // Eksempeldata
@@ -258,6 +246,7 @@
     Kort fremoverrettet vurdering.
   ],
 )
+// ------
 
 // VIKTIG: Liste må ha trailing comma ved ett element chat sa det
 #let funds = (fund_1,)
