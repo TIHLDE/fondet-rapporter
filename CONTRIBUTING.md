@@ -7,6 +7,7 @@ in the same place, a branch and a pull request in this repository.
 
 ```sh
 make new YEAR=2026 PERIOD=q1        # copy a template into reports/2026/q1
+make new YEAR=2026 PERIOD=q1 SHAPE=skagen   # a different shape of the same report
 make watch DIR=reports/2026/q1      # rebuild on every save
 make check                          # build everything, fail on leftover TODO
 ```

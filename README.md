@@ -9,9 +9,9 @@ printed text is Norwegian.
 ## Layout
 
 ```
-lib/          shared modules: theme, tables, charts, funds, page setup, glossary
-templates/    templates by year, each with a compiled preview.pdf
-reports/      reports by year, each with a compiled report.pdf
+lib/          shared modules: theme, tables, charts, funds, page setup, slides, glossary
+templates/    <year>/<quarterly|annual>/<shape>/, each with a compiled preview.pdf
+reports/      <year>/<period>/, each with a compiled report.pdf
 docs/         how to write the reports, and the methods behind them
 assets/       logos
 ```
@@ -21,16 +21,23 @@ assets/       logos
 `templates/2026` is the current generation. Each folder holds the draft and a
 compiled `preview.pdf`, so you can look before you copy.
 
-| Template | For |
-| --- | --- |
-| `quarterly` | The full quarterly report, chapters and contents |
-| `quarterly-status` | Two or three pages: facts, returns, comment, holdings |
-| `quarterly-letter` | The quarter written as a letter to the members |
-| `annual` | The year as a whole |
-| `annual-endowment` | The year with governance, limits and an appendix |
+| Shape | Modelled on | For |
+| --- | --- | --- |
+| `quarterly/classic` | The group's own report | The full quarter, chapters and contents |
+| `quarterly/skagen` | A fund manager's monthly status report | The ordinary quarter, two or three pages |
+| `quarterly/verdi` | A student group's monthly update | The quarter written as a letter |
+| `quarterly/onepage` | A fund fact sheet | One page to hand out or pin |
+| `quarterly/board` | A board pack | The meeting, decisions first |
+| `quarterly/slides` | A deck | Presenting the quarter, 16:9 |
+| `annual/classic` | The group's own report | The year as a whole |
+| `annual/nbim` | The sovereign wealth fund's reporting | Return first, then the framework, accounts at the back |
+| `annual/uc` | A university endowment report | The year with governance and an appendix |
+| `annual/ucits` | What a fund's annual report must carry | The year with the accounts in front |
 
-They share the library and the fund data, so changing shape means changing which
-`main.typ` you copied, not re-entering numbers.
+Two documents are owed, the quarterly and the annual report. Each is a folder of
+shapes, and every shape is a full draft with its own `preview.pdf`. They share
+the library and the fund data, so picking another shape means copying another
+`main.typ`, not re-entering numbers.
 
 [docs/writing-reports.md](docs/writing-reports.md) says what belongs in each of
 them, and gives the formulas behind the analysis chapter.
@@ -71,9 +78,10 @@ template on each pull request.
 ## New report
 
 ```sh
-make new YEAR=2026 PERIOD=q1                     # quarterly
-make new YEAR=2026 PERIOD=annual KIND=annual     # annual
-make new YEAR=2026 PERIOD=q1 TEMPLATE=2025       # older template generation
+make new YEAR=2026 PERIOD=q1                                  # quarterly, classic
+make new YEAR=2026 PERIOD=q1 SHAPE=skagen                     # another shape
+make new YEAR=2026 PERIOD=annual KIND=annual SHAPE=nbim       # annual
+make new YEAR=2026 PERIOD=q1 TEMPLATE=2025                    # older generation
 ```
 
 That copies the template into `reports/<year>/<period>/`. Fill in the fields

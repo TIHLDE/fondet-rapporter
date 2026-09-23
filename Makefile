@@ -2,17 +2,18 @@ TYPST ?= typst
 
 # Everything that can change the output. Compiling takes milliseconds, so the
 # rules stay simple instead of tracking per-report dependencies.
-SOURCES := $(wildcard lib/*.typ) $(wildcard reports/*/*/*.typ) $(wildcard templates/*/*/*.typ)
+SOURCES := $(wildcard lib/*.typ) $(wildcard reports/*/*/*.typ) $(wildcard templates/*/*/*/*.typ)
 
 # The Q2 2026 draft needs the cetz package and only builds with network access,
 # so it stays out of the default build.
 REPORT_MAINS := $(filter-out reports/2026/q2-draft/main.typ, $(wildcard reports/*/*/main.typ))
-TEMPLATE_MAINS := $(wildcard templates/*/*/main.typ)
+TEMPLATE_MAINS := $(wildcard templates/*/*/*/main.typ)
 
 # The PDF sits next to the source it was built from.
 PDFS := $(REPORT_MAINS:%/main.typ=%/report.pdf) $(TEMPLATE_MAINS:%/main.typ=%/preview.pdf)
 
 KIND ?= quarterly
+SHAPE ?= classic
 TEMPLATE ?= 2026
 
 .PHONY: all clean watch new
@@ -29,16 +30,17 @@ watch:
 	@test -n "$(DIR)" || { echo "Usage: make watch DIR=reports/2026/q1"; exit 1; }
 	$(TYPST) watch --root . $(DIR)/main.typ $(DIR)/report.pdf
 
-# make new YEAR=2026 PERIOD=q1
-# make new YEAR=2026 PERIOD=annual KIND=annual
-# KIND is a folder under templates/<TEMPLATE>: quarterly or annual.
-# TEMPLATE=2025 picks the older generation.
+# make new YEAR=2026 PERIOD=q1                         the full quarterly report
+# make new YEAR=2026 PERIOD=q1 SHAPE=skagen            another shape of it
+# make new YEAR=2026 PERIOD=annual KIND=annual SHAPE=nbim
+# KIND is quarterly or annual, SHAPE is a folder under it, TEMPLATE=2025 picks
+# the older generation.
 new:
-	@test -n "$(YEAR)" -a -n "$(PERIOD)" || { echo "Usage: make new YEAR=2026 PERIOD=q1 [KIND=annual] [TEMPLATE=2025]"; exit 1; }
-	@test -d templates/$(TEMPLATE)/$(KIND) || { echo "No template templates/$(TEMPLATE)/$(KIND)"; exit 1; }
+	@test -n "$(YEAR)" -a -n "$(PERIOD)" || { echo "Usage: make new YEAR=2026 PERIOD=q1 [KIND=annual] [SHAPE=skagen] [TEMPLATE=2025]"; exit 1; }
+	@test -d templates/$(TEMPLATE)/$(KIND)/$(SHAPE) || { echo "No template templates/$(TEMPLATE)/$(KIND)/$(SHAPE)"; exit 1; }
 	@test ! -d reports/$(YEAR)/$(PERIOD) || { echo "reports/$(YEAR)/$(PERIOD) already exists"; exit 1; }
 	@mkdir -p reports/$(YEAR)
-	cp -r templates/$(TEMPLATE)/$(KIND) reports/$(YEAR)/$(PERIOD)
+	cp -r templates/$(TEMPLATE)/$(KIND)/$(SHAPE) reports/$(YEAR)/$(PERIOD)
 	@rm -f reports/$(YEAR)/$(PERIOD)/preview.pdf
 	@echo "Created reports/$(YEAR)/$(PERIOD). Fill in the TODOs, then: make reports/$(YEAR)/$(PERIOD)/report.pdf"
 

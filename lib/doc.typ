@@ -64,7 +64,9 @@
   ]
 ]
 
-// Full report: cover page, table of contents, numbered chapters.
+// A report. Cover page, table of contents and chapter numbers are on by
+// default and can each be turned off, which is what separates the long shapes
+// from the short ones.
 // Use with `#show: report.with(title: ..., period: ..., year: ...)`.
 #let report(
   title: none,
@@ -72,6 +74,7 @@
   year: none,
   contents: true,
   numbered: true,
+  cover-page: true,
   outline-title: "Innhold",
   body,
 ) = {
@@ -92,8 +95,10 @@
   show heading.where(level: 2): set text(size: 1.2em, fill: theme.blue)
   show heading.where(level: 3): set text(size: 1.1em)
 
-  cover(title, period)
-  pagebreak()
+  if cover-page {
+    cover(title, period)
+    pagebreak()
+  }
   set page(.._page-args(title, year))
 
   if contents {
