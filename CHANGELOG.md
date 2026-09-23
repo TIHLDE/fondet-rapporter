@@ -5,6 +5,11 @@ Reports built on the library always use the current version of it.
 
 ## 2026-09-23
 
+- Three more shapes to choose from: `quarterly-status`, `quarterly-letter` and
+  `annual-endowment`, modelled on how fund managers, endowments and student
+  investment groups actually publish
+- `report()` takes `contents` and `numbered`, so a short report can skip the
+  table of contents and the chapter numbers
 - Quarterly and annual reports get an analysis chapter: attribution,
   risk-adjusted return and currency effect
 - Compiled PDFs moved next to the source they were built from, templates

@@ -139,3 +139,17 @@
     #charts.legend(items)
   ]
 }
+
+// The whole portfolio as one table, for reports that do not have room for a
+// section per fund.
+#let fund-summary(funds) = data-table(
+  ([Fond], [Vekt], [Avkastning 1 år], [Referanseindeks], [Honorar]),
+  funds.map(data => (
+    [#data.name],
+    format.pct(data.weight),
+    [#data.returns.one-year.fund],
+    [#data.returns.one-year.benchmark],
+    [#data.facts.management-fee],
+  )),
+  align: (left, right, right, right, right),
+)

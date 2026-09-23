@@ -66,15 +66,26 @@
 
 // Full report: cover page, table of contents, numbered chapters.
 // Use with `#show: report.with(title: ..., period: ..., year: ...)`.
-#let report(title: none, period: none, year: none, outline-title: "Innhold", body) = {
+#let report(
+  title: none,
+  period: none,
+  year: none,
+  contents: true,
+  numbered: true,
+  outline-title: "Innhold",
+  body,
+) = {
   set document(title: title, author: "Forvaltningsgruppen, TIHLDE")
   show link: underline
   set text(.._text-args)
   set par(.._par-args)
 
-  // Number chapters and sections, but not the headings inside a section.
-  set heading(numbering: (..parts) => {
-    if parts.pos().len() <= 2 { numbering("1.1", ..parts.pos()) }
+  // Number chapters and sections, but not the headings inside a section. Short
+  // reports without chapters set `numbered: false` instead.
+  set heading(numbering: if numbered {
+    (..parts) => {
+      if parts.pos().len() <= 2 { numbering("1.1", ..parts.pos()) }
+    }
   })
   show heading: set block(above: 20pt, below: 10pt)
   show heading.where(level: 1): set text(size: 1.6em, fill: theme.blue)
@@ -85,8 +96,10 @@
   pagebreak()
   set page(.._page-args(title, year))
 
-  outline(title: outline-title)
-  pagebreak()
+  if contents {
+    outline(title: outline-title)
+    pagebreak()
+  }
 
   body
 
