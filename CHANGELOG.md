@@ -1,0 +1,19 @@
+# Changelog
+
+Changes to the templates in `templates/` and the shared library in `lib/`.
+Reports in `reports/` always build against the current library.
+
+## templates/v1
+
+First version built on a shared library, replacing the copy-per-project setup
+in the Typst web app.
+
+- One library for the cover page, header and footer, tables, funds and glossary
+- Automatic heading numbers, so sections no longer have to be renumbered by hand
+- Fund figures live in `funds.typ` with required fields; a missing figure fails
+  the build
+- `weight` is a number and drives both the fund heading and the portfolio weight
+  chart
+- Norwegian number formatting in `lib/format.typ`
+- Fixed: fund names ran into the previous paragraph, and the header logo was
+  clipped by the page margin
