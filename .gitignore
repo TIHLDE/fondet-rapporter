@@ -4,3 +4,6 @@ DESIGN.md
 .claude/
 .mcp.json
 .playwright-mcp/
+
+# Bundles for upload to the Typst web app
+out/

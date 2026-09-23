@@ -104,6 +104,45 @@ _"Målet til fondet er ikke å slå markedet men å ha en trygg positiv avkastni
   #fund-section(data)
 ]
 
+= Analyse
+
+== Attribusjon
+
+Meravkastningen mot OSEBX brutt ned i allokering, seleksjon og samspill. Summen
+er lik differansen mot indeks.
+
+#data-table(
+  ([Segment], [Allokering], [Seleksjon], [Samspill], [Sum]),
+  (
+    ([TODO], [TODO], [TODO], [TODO], [TODO]),
+    ([TODO], [TODO], [TODO], [TODO], [TODO]),
+    ([*Totalt*], [TODO], [TODO], [TODO], [*TODO*]),
+  ),
+  align: (left, right, right, right, right),
+)
+
+TODO: én setning om hva nedbrytingen betyr. Kom meravkastningen fra vektene
+eller fra utvalget, og er det gjentakbart.
+
+== Risikojustert avkastning
+
+#data-table(
+  ([Mål], [Fondet], [OSEBX]),
+  (
+    ([Standardavvik], [TODO], [TODO]),
+    ([Sharpe-ratio], [TODO], [TODO]),
+    ([Tracking error], [TODO], [—]),
+    ([Informasjonsrate], [TODO], [—]),
+    ([Maksimalt fall], [TODO], [TODO]),
+  ),
+  align: (left, right, right),
+)
+
+== Valutaeffekt
+
+TODO: hvor mye av avkastningen i kroner som kom fra kursbevegelser og hvor mye
+fra valuta. Uten dette skillet får forvaltningen ros eller skyld for kronekursen.
+
 = Økonomi QX, retrospekt
 
 == Finansiell oversikt

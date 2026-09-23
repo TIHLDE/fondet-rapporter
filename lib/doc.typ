@@ -23,13 +23,53 @@
   #line(length: 60%, stroke: 1pt + theme.blue)
 ]
 
-// Wrap a report with `#show: report.with(title: ..., period: ..., year: ...)`.
-// Everything after the show rule is the body.
-#let report(title: none, period: none, year: none, outline-title: "Innhold", body) = {
-  set document(title: title, author: "Forvaltningsgruppen, TIHLDE")
+#let _base-text() = {
   set text(font: theme.body-font, size: theme.body-size, lang: "nb", fill: theme.ink)
   set par(justify: true, leading: 0.8em, spacing: 1.2em)
+}
+
+#let _page-args(title, year) = (
+  paper: "a4",
+  margin: (x: 50pt, top: 0.75in, bottom: 50pt),
+  header-ascent: 20pt,
+  footer-descent: 24pt,
+  header: {
+    grid(
+      columns: (auto, 1fr),
+      align: (left + bottom, right + bottom),
+      image("/assets/liten-blaa.png", height: 0.6cm),
+      text(size: theme.small-size)[#title],
+    )
+    v(3pt)
+    line(length: 100%, stroke: 3pt + theme.blue)
+  },
+  footer: context {
+    line(length: 100%, stroke: 3pt + theme.blue)
+    v(2pt)
+    set text(size: theme.small-size)
+    grid(
+      columns: (1fr, auto, 1fr),
+      align: (left, center, right),
+      [#year],
+      counter(page).display("1/1", both: true),
+      [Forvaltningsgruppen],
+    )
+  },
+)
+
+#let disclaimer = align(center)[
+  #text(size: theme.small-size, style: "italic")[
+    Dette er Forvaltningsgruppens egne vurderinger og skal ikke leses som
+    finansielle råd.
+  ]
+]
+
+// Full report: cover page, table of contents, numbered chapters.
+// Use with `#show: report.with(title: ..., period: ..., year: ...)`.
+#let report(title: none, period: none, year: none, outline-title: "Innhold", body) = {
+  set document(title: title, author: "Forvaltningsgruppen, TIHLDE")
   show link: underline
+  _base-text()
 
   // Number chapters and sections, but not the headings inside a section.
   set heading(numbering: (..parts) => {
@@ -42,35 +82,7 @@
 
   cover(title, period)
   pagebreak()
-
-  set page(
-    paper: "a4",
-    margin: (x: 50pt, top: 0.75in, bottom: 50pt),
-    header-ascent: 20pt,
-    footer-descent: 24pt,
-    header: {
-      grid(
-        columns: (auto, 1fr),
-        align: (left + bottom, right + bottom),
-        image("/assets/liten-blaa.png", height: 0.6cm),
-        text(size: theme.small-size)[#title],
-      )
-      v(3pt)
-      line(length: 100%, stroke: 3pt + theme.blue)
-    },
-    footer: context {
-      line(length: 100%, stroke: 3pt + theme.blue)
-      v(2pt)
-      set text(size: theme.small-size)
-      grid(
-        columns: (1fr, auto, 1fr),
-        align: (left, center, right),
-        [#year],
-        counter(page).display("1/1", both: true),
-        [Forvaltningsgruppen],
-      )
-    },
-  )
+  set page(.._page-args(title, year))
 
   outline(title: outline-title)
   pagebreak()
@@ -78,10 +90,33 @@
   body
 
   v(24pt, weak: true)
-  align(center)[
-    #text(size: theme.small-size, style: "italic")[
-      Dette er Forvaltningsgruppens egne vurderinger og skal ikke leses som
-      finansielle råd.
+  disclaimer
+}
+
+// Short document: no cover, no table of contents, no heading numbers. For fact
+// sheets, single-fund notes and decision memos.
+#let note(title: none, subtitle: none, year: none, body) = {
+  set document(title: title, author: "Forvaltningsgruppen, TIHLDE")
+  show link: underline
+  _base-text()
+
+  set heading(numbering: none)
+  show heading: set block(above: 16pt, below: 8pt)
+  show heading.where(level: 1): set text(size: 1.3em, fill: theme.blue)
+  show heading.where(level: 2): set text(size: 1.1em, fill: theme.blue)
+
+  set page(.._page-args(title, year))
+
+  block(above: 0pt, below: 14pt)[
+    #text(size: 1.8em, weight: "bold")[#title]
+    #if subtitle != none [
+      #v(2pt)
+      #text(size: theme.small-size, fill: theme.muted)[#subtitle]
     ]
   ]
+
+  body
+
+  v(20pt, weak: true)
+  disclaimer
 }
