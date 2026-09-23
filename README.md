@@ -18,8 +18,19 @@ assets/       logos
 
 ## Templates
 
-`templates/2026` is the current generation: `quarterly` and `annual`. Each folder
-holds the draft and a compiled `preview.pdf`, so you can look before you copy.
+`templates/2026` is the current generation. Each folder holds the draft and a
+compiled `preview.pdf`, so you can look before you copy.
+
+| Template | For |
+| --- | --- |
+| `quarterly` | The full quarterly report, chapters and contents |
+| `quarterly-status` | Two or three pages: facts, returns, comment, holdings |
+| `quarterly-letter` | The quarter written as a letter to the members |
+| `annual` | The year as a whole |
+| `annual-endowment` | The year with governance, limits and an appendix |
+
+They share the library and the fund data, so changing shape means changing which
+`main.typ` you copied, not re-entering numbers.
 
 [docs/writing-reports.md](docs/writing-reports.md) says what belongs in each of
 them, and gives the formulas behind the analysis chapter.

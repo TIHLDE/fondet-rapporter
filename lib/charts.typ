@@ -40,3 +40,35 @@
       .flatten(),
   )
 }
+
+// Diverging bars around a zero line. Negative values grow left, positive right,
+// and the value sits outside the bar, so nothing overlaps at any label length.
+#let bar-chart(items, peak: none, row-height: 12pt) = {
+  let limit = if peak != none { peak } else {
+    items.fold(0.0, (highest, item) => calc.max(highest, calc.abs(item.at(1))))
+  }
+  // Nothing to draw before the numbers are filled in.
+  if limit == 0.0 { return }
+  set text(size: theme.small-size)
+
+  grid(
+    columns: (auto, 1fr, 1fr, auto),
+    column-gutter: 6pt,
+    row-gutter: 4pt,
+    align: (left + horizon, right + horizon, left + horizon, right + horizon),
+    grid.vline(x: 2, stroke: 0.5pt + theme.rule),
+    ..items
+      .map(item => {
+        let (label, value) = item
+        let width = calc.abs(value) / limit * 100%
+        let colour = if value < 0 { theme.negative } else { theme.positive }
+        (
+          [#label],
+          if value < 0 { rect(width: width, height: row-height, stroke: none, fill: colour) },
+          if value >= 0 { rect(width: width, height: row-height, stroke: none, fill: colour) },
+          text(fill: colour, weight: "bold")[#format.pct(value, sign: true)],
+        )
+      })
+      .flatten(),
+  )
+}

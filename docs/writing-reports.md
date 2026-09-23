@@ -3,16 +3,44 @@
 What belongs in each document, and the methods the templates leave room for.
 Aimed at whoever writes the next report, not at a reader of the finished one.
 
-## The two reports
+## Which template
 
-| Template | Use it for | Length |
-| --- | --- | --- |
-| `quarterly` | The quarter's report to the association | 10 to 16 pages |
-| `annual` | The year seen as a whole, with the four quarters side by side | 12 to 20 pages |
+Two documents are owed, the quarterly and the annual report, and each comes in
+more than one shape. Pick the shape that fits the quarter, not the one that
+fills the most pages.
 
-Two templates, because two documents are actually owed. Anything else, a single
-page before a meeting or the case for a trade, is worth a template only once it
-has been written by hand a few times and the shape has settled.
+| Template | Shape | Use it for | Length |
+| --- | --- | --- | --- |
+| `quarterly` | Chapters, numbered, with contents | The full report when something structural changed | 10 to 16 pages |
+| `quarterly-status` | Two columns, facts and figures first | The ordinary quarter, and the one people actually read | 2 to 3 pages |
+| `quarterly-letter` | Narrative, addressed to the members | A quarter where the argument matters more than the tables | 2 to 4 pages |
+| `annual` | Chapters, numbered, with contents | The year seen as a whole | 12 to 20 pages |
+| `annual-endowment` | Governance first, appendix at the back | The year when the association wants the framework and the limits documented | 15 to 25 pages |
+
+All five build on the same library, so the numbers and the fund data are shared.
+Switching shape means changing the `main.typ` you copied, not re-entering data.
+
+## Where the shapes come from
+
+`quarterly-status` follows the layout Norwegian fund managers use for their
+monthly status reports: a fact column down the left, a period table against the
+index, returns by calendar year, the manager's comment, then the holdings and
+the disclaimer (SKAGEN Fondene, 2025).
+
+`annual-endowment` follows the way institutional endowments report to the body
+that owns the money. The University of California opens with the purpose of the
+report and who prepared it, then significant changes since last year, then the
+consolidated overview, then profiles per pool, and closes with an appendix of
+risk and return, benchmark history, spending policy, glossary and data sources
+(University of California, 2024). The limits-and-breaches table and the separate
+section for relative return come from the reports of the Norwegian sovereign
+wealth fund, which leads with what the fund returned against its benchmark and
+then accounts for the framework it operates inside (Norges Bank Investment
+Management, 2025).
+
+`quarterly-letter` is the shape student investment groups use when they publish:
+portfolio changes, the market view, and reflections on what happened, written as
+prose rather than as sections (Verdi NTNU, n.d.).
 
 ## What a performance report has to contain
 
@@ -112,6 +140,17 @@ https://analystprep.com/study-notes/cfa-level-iii/sources-of-portfolio-returns/
 
 CFA Institute. (2026). *Overview of the Global Investment Performance
 Standards*. https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/overview-of-the-global-investment-performance-standards
+
+Norges Bank Investment Management. (2025). *Half-year report 2025*.
+https://www.nbim.no/en/news-and-insights/reports/2025/half-year-report-2025/web-report-half-year-report-2025/
+
+SKAGEN Fondene. (2025). *SKAGEN Avkastning: Månedsrapport februar 2025*.
+https://www.skagenfondene.no/globalassets/pdfs/status-reports/norway/skagen-avkastning/2025/20250305_skagen-avkastning-februar.pdf
+
+University of California. (2024). *Annual endowment report, fiscal year
+2023-2024*. https://www.ucop.edu/investment-office/investment-reports/annual-reports/annual-endwoment-report-fy-2023-2024.pdf
+
+Verdi NTNU. (n.d.). *Månedsrapporter*. https://www.verdintnu.no/oppdateringer
 
 Verdipapirfondenes forening. (n.d.). *Bransjeanbefalinger*.
 https://vff.no/bransjeanbefalinger
