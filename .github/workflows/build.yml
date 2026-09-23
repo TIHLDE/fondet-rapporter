@@ -1,0 +1,30 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: typst-community/setup-typst@v5
+        with:
+          typst-version: ^0.14.0
+
+      # Roboto is not on the runner. The templates fall back to Liberation Sans,
+      # which is, so the PDFs built here are for checking, not for publishing.
+      - name: Build every report and template
+        run: make check
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pdfs
+          path: |
+            reports/**/*.pdf
+            templates/**/*.pdf
+          if-no-files-found: error
