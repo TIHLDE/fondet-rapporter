@@ -23,10 +23,10 @@
   #line(length: 60%, stroke: 1pt + theme.blue)
 ]
 
-#let _base-text() = {
-  set text(font: theme.body-font, size: theme.body-size, lang: "nb", fill: theme.ink)
-  set par(justify: true, leading: 0.8em, spacing: 1.2em)
-}
+// Set rules only reach the block they are written in, so these are argument
+// lists to spread rather than a function that applies them.
+#let _text-args = (font: theme.body-font, size: theme.body-size, lang: "nb", fill: theme.ink)
+#let _par-args = (justify: true, leading: 0.8em, spacing: 1.2em)
 
 #let _page-args(title, year) = (
   paper: "a4",
@@ -69,7 +69,8 @@
 #let report(title: none, period: none, year: none, outline-title: "Innhold", body) = {
   set document(title: title, author: "Forvaltningsgruppen, TIHLDE")
   show link: underline
-  _base-text()
+  set text(.._text-args)
+  set par(.._par-args)
 
   // Number chapters and sections, but not the headings inside a section.
   set heading(numbering: (..parts) => {
@@ -98,7 +99,8 @@
 #let note(title: none, subtitle: none, year: none, body) = {
   set document(title: title, author: "Forvaltningsgruppen, TIHLDE")
   show link: underline
-  _base-text()
+  set text(.._text-args)
+  set par(.._par-args)
 
   set heading(numbering: none)
   show heading: set block(above: 16pt, below: 8pt)
